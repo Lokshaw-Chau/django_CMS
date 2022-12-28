@@ -1,0 +1,38 @@
+{% extends 'canteen/canteen_base.html' %}
+
+{% block store_content %}
+
+{% for i in canteen_with_wicket_list %}
+<div class="container headerdiv">
+    <h3 class="headertext" align="center" id="{{i.id}}">{{ i.name }}</h3>
+</div>
+<div>
+    <div class="container">
+        <div class="row">
+            {% for j in wicket_list %}
+            {% if j.can_id == i %}
+            <div class="col-lg-4 d-flex align-items-stretch">
+                <div class="card cardmodify cardbackground" style="width: 18rem;">
+                    <div class="card-header">
+                        <h5><b>{{ j.name }}</b></h5>
+                    </div>
+                    <!--<img class="card-img-top" src="{{ j.shop_photo.url }}" alt="Card image cap" height="180px"
+                         width="320px">-->
+                    <div class="card-header">
+                        {% if j.status == 1 %}
+                        <h5><b>营业中</b></h5>
+                        {% else %}
+                        <h5><b>歇业中</b></h5>
+                        {% endif %}
+                        <a href="/dish#{{j.wicket_id}}" class="btn btn-success btn-sm addtocartbutton"><font size="3px">进入窗口</font></a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

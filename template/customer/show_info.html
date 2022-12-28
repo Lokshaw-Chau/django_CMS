@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block title %}个人信息中心{% endblock %}
+{% block css %}
+<link href="{% static 'css/login.css' %}" rel="stylesheet"/>{% endblock %}
+
+{% block content %}
+<div class="container formback">
+    <div class="loginform jumbotron">
+        <h3>个人信息中心</h3>
+        <form class='form-group' action="/customer/show_info/" method="POST">
+            {% csrf_token %}
+            <div class="card-header">
+                <h5 align="left">用户名：{{ request.session.user_name }}</h5>
+                <h5 align="left">电话：{{ request.session.tel }}</h5>
+                {% for i in address_list %}
+                <h5 align="left">地址：{{ i.location }}</h5>
+                {% endfor %}
+                <a href="/customer/info" class="btn btn-success "><font size="1px">新增地址</font></a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
